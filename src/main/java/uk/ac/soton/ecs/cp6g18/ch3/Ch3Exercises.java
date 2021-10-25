@@ -144,6 +144,13 @@ public class Ch3Exercises {
         // creating the segmenter
         FelzenszwalbHuttenlocherSegmenter<MBFImage> segmenter = new FelzenszwalbHuttenlocherSegmenter<MBFImage>();
 
+        /**
+         * NOTE
+         *
+         * This segmentation algorithm takes a while to run! It will be a couple minuites before the result is displayed
+         * in a window.
+         */
+
         // segmenting the image
         List<ConnectedComponent> components = segmenter.segment(image);
 
