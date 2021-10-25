@@ -38,10 +38,10 @@ public class Ch3Exercises {
      * @param args System arguments.
      */
     public static void main( String[] args ) throws Exception{
-        // Exercise 1 - Display Utilities.
-        exercise1();
+        // Exercise 1 - The PixelProcessor
+        //exercise1();
 
-        // Exercise 2 - Drawing.
+        // Exercise 2 - A Real Segmentation Algorithm
         //exercise2();
     }
 
