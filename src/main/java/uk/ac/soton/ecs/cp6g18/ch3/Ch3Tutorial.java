@@ -34,7 +34,7 @@ public class Ch3Tutorial {
      */
     public static void main( String[] args ) throws Exception{
         // creating the display frame
-        JFrame displayFrame = DisplayUtilities.createNamedWindow("Display", "OpenIMAJ Tutorial: Chapter 2");
+        JFrame displayFrame = DisplayUtilities.createNamedWindow("Display", "OpenIMAJ Tutorial: Chapter 3: Tutorial");
 
         ///////////////////////////
         // TUTORIAL INTRODUCTION //
