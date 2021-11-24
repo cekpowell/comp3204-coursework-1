@@ -210,10 +210,10 @@ public class Ch3Tutorial {
          *
          * The GreyscaleConnectedComponentLabeler class can be used to find the connected components in the image.
          *
-         * Note that this class only processes grey scale images, so we need to flatten our RGB image into greeyscale
+         * Note that this class only processes grey scale images, so we need to flatten our RGB image into greyscale
          * in order to process it.
          *
-         * The flatten method creates a greyscale image from an RGB one by averaging the value of the three bands for
+         * The flatten method creates a grayscale image from an RGB one by averaging the value of the three bands for
          * each pixel.
          */
 
