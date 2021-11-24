@@ -4,21 +4,12 @@ import org.openimaj.feature.DoubleFVComparison;
 import org.openimaj.image.DisplayUtilities;
 import org.openimaj.image.ImageUtilities;
 import org.openimaj.image.MBFImage;
-import org.openimaj.image.colour.ColourSpace;
-import org.openimaj.image.connectedcomponent.GreyscaleConnectedComponentLabeler;
-import org.openimaj.image.pixel.ConnectedComponent;
 import org.openimaj.image.pixel.statistics.HistogramModel;
-import org.openimaj.image.typography.hershey.HersheyFont;
-import org.openimaj.math.statistics.distribution.Histogram;
 import org.openimaj.math.statistics.distribution.MultidimensionalHistogram;
-import org.openimaj.ml.clustering.FloatCentroidsResult;
-import org.openimaj.ml.clustering.assignment.HardAssigner;
-import org.openimaj.ml.clustering.kmeans.FloatKMeans;
 
 import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
