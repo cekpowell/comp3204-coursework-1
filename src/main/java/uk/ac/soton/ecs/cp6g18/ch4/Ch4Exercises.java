@@ -1,30 +1,31 @@
 package uk.ac.soton.ecs.cp6g18.ch4;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.openimaj.feature.DoubleFVComparison;
 import org.openimaj.image.DisplayUtilities;
 import org.openimaj.image.ImageUtilities;
 import org.openimaj.image.MBFImage;
 import org.openimaj.image.colour.ColourSpace;
-import org.openimaj.image.colour.RGBColour;
 import org.openimaj.image.pixel.ConnectedComponent;
-import org.openimaj.image.processing.edges.CannyEdgeDetector;
+import org.openimaj.image.pixel.statistics.HistogramModel;
 import org.openimaj.image.processor.PixelProcessor;
 import org.openimaj.image.segmentation.FelzenszwalbHuttenlocherSegmenter;
 import org.openimaj.image.segmentation.SegmentationUtilities;
-import org.openimaj.image.typography.hershey.HersheyFont;
-import org.openimaj.math.geometry.shape.Ellipse;
+import org.openimaj.math.statistics.distribution.MultidimensionalHistogram;
 import org.openimaj.ml.clustering.FloatCentroidsResult;
 import org.openimaj.ml.clustering.assignment.HardAssigner;
 import org.openimaj.ml.clustering.kmeans.FloatKMeans;
 
 import javax.swing.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * OpenIMAJ Tutorial.
  *
- * Chapter 3 - Introduction to Clustering, Segmentation and Connected Components
+ * Chapter 4 - Global Image Features
  *
  * Exercises
  *
@@ -38,11 +39,11 @@ public class Ch4Exercises {
      * @param args System arguments.
      */
     public static void main( String[] args ) throws Exception{
-        // Exercise 1 - The PixelProcessor
-        //exercise1();
+        // Exercise 1 - Finding and Displaying Similar Images
+        exercise1();
 
-        // Exercise 2 - A Real Segmentation Algorithm
-        //exercise2();
+        // Exercise 2 - Exploring Comparison Measures
+        exercise2();
     }
 
     ////////////////
@@ -50,70 +51,67 @@ public class Ch4Exercises {
     ////////////////
 
     /**
-     * Exercise 1 - The PixelProcessor
+     * Exercise 1 - Finding and Displaying Similar Images
      *
-     * Rather than looping over the image pixels using two for loops, it is possible to use a PixelProcessor to
-     * accomplish the same task.
-     *
-     * Can you re-implement the loop that replaces each pixel with its class centroid using a PixelProcessor?
-     *
-     * What are the advantages and disadvantages of using a PixelProcessor?
+     * Which images are most similar? Does that match with what you expect if you look at the images? Can you make 
+     * the application display the two most similar images that are not the same?
      */
     public static void exercise1() throws Exception{
-        // creating the display frame
-        JFrame displayFrame = DisplayUtilities.createNamedWindow("Display", "OpenIMAJ Tutorial: Chapter 3: Exercise 1", false);
 
-        // loading an image to be used in exercise
-        MBFImage image = ImageUtilities.readMBF(new URL("https://images.theconversation.com/files/350851/original/file-20200803-22-dfm95n.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop"));
-
-        // transforming the image into the LAB colour space
-        image = ColourSpace.convert(image, ColourSpace.CIE_Lab);
-
-        // constructing the runner
-        FloatKMeans cluster = FloatKMeans.createExact(2);
-
-        // gathering the image data from the image
-        float[][] imageData = image.getPixelVectorNative(new float[image.getWidth() * image.getHeight()][3]); // 3 as each pixel has 3 bands?
-
-        // running the K-Means algorithm
-        FloatCentroidsResult result = cluster.cluster(imageData);
-
-        // getting the centroids from the result of the clustering algorithm
-        final float[][] centroids = result.centroids;
-
-        // gathering the HardAssigner
-        final HardAssigner<float[], ?, ?> assigner = result.defaultHardAssigner();
+        // WHICH IMAGES ARE MOST SIMILAR //
 
         /**
-         * Using PixelProcessor to process the pixels
+         * The most similar images are images 1 and 2.
+         * 
+         * This is to be expected as they have similar colours (i.e., reds and oranges),
+         * where as image 3 differs to both of these (i.e., mainly blacks and greys).
          */
-        image.processInplace(new PixelProcessor<Float[]>() {
-            @Override
-            public Float[] processPixel(Float[] pixel) {
-                // getting this pixel's centroid index
-                int centroid = assigner.assign(ArrayUtils.toPrimitive(pixel));
 
-                // returning the new pixel colour (the centroid of the class it belongs to)
-                return ArrayUtils.toObject(centroids[centroid]);
+        // FINDING MOST SIMILAR IMAGES //
+
+        /**
+         * Creating list of histograms
+         */
+
+        URL[] imageURLs = new URL[] {
+            new URL( "http://openimaj.org/tutorial/figs/hist1.jpg" ),
+            new URL( "http://openimaj.org/tutorial/figs/hist2.jpg" ),
+            new URL( "http://openimaj.org/tutorial/figs/hist3.jpg" )
+        };
+        List<MultidimensionalHistogram> histograms = new ArrayList<MultidimensionalHistogram>();
+        HistogramModel model = new HistogramModel(4, 4, 4);
+        for( URL u : imageURLs ) {
+            model.estimateModel(ImageUtilities.readMBF(u));
+            histograms.add( model.histogram.clone() );
+        }
+
+        /**
+         * Comparing histograms and determining which images are the most similar;
+         */
+
+        double smallestDistance = Double.MAX_VALUE;
+        int smallestDistanceHistogram1 = 0;
+        int smallestDistanceHistogram2 = 0;
+
+        for( int i = 0; i < histograms.size(); i++ ) {
+            for( int j = i; j < histograms.size(); j++ ) {
+                if(i != j){
+                    double distance = histograms.get(i).compare( histograms.get(j), DoubleFVComparison.EUCLIDEAN );
+
+                    if(distance < smallestDistance){
+                        smallestDistance = distance;
+                        smallestDistanceHistogram1 = i;
+                        smallestDistanceHistogram2 = j;
+                    }
+                }
             }
-        });
-
-        // converting the new image into RGB space and displaying it
-        image = ColourSpace.convert(image, ColourSpace.RGB);
-        DisplayUtilities.display(image, displayFrame);
+        }
 
         /**
-         * Advantages of Pixel Processor
-         *
-         *  - Cleaner code (don't need to have nested for loops)
-         *  - ??
-         *
-         * Disadvantages of Pixel Processor
-         *
-         *  - Have to apply the same process to all pixels - e.g., can no longer only process pixels in certain
-         *  locations as we no longer have access to the co-ordinates of the pixels.
-         *  - ??
+         * Displaying the most similar image histograms.
          */
+
+        System.out.println("Images : " + smallestDistanceHistogram1 + " and : " + smallestDistanceHistogram2 + " are most similar with a distance of : " + smallestDistance);
     }
 
     ///////////////////////
@@ -125,40 +123,56 @@ public class Ch4Exercises {
     ////////////////
 
     /**
-     * Exercise 2 - A Real Segmentation Algorithm
+     * Exercise 2 - Exploring Comparison Measures
      *
-     * The segmentation algorithm we just implemented can work reasonably well, but is rather naïve. OpenIMAJ contains
-     * an implementation of a popular segmentation algorithm called the FelzenszwalbHuttenlocherSegmenter.
-     *
-     * Try using the FelzenszwalbHuttenlocherSegmenter for yourself and see how it compares to the basic segmentation
-     * algorithm we implemented. You can use the SegmentationUtilities.renderSegments() static method to draw the
-     * connected components produced by the segmenter.
+     * What happens when you use a different comparison measure (such as 
+     * DoubleFVComparison.INTERSECTION)?
      */
     public static void exercise2() throws Exception{
-        // creating the display frame
-        JFrame displayFrame = DisplayUtilities.createNamedWindow("Display", "OpenIMAJ Tutorial: Chapter 3: Exercise 2");
 
-        // loading an image to be used in the tutorial
-        MBFImage image = ImageUtilities.readMBF(new URL("https://images.theconversation.com/files/350851/original/file-20200803-22-dfm95n.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop"));
-
-        // creating the segmenter
-        FelzenszwalbHuttenlocherSegmenter<MBFImage> segmenter = new FelzenszwalbHuttenlocherSegmenter<MBFImage>();
+        // TESTING DIFFERENT COMPARISON MEASURES //
 
         /**
-         * NOTE
-         *
-         * This segmentation algorithm takes a while to run! It will be a couple minuites before the result is displayed
-         * in a window.
+         * Creating list of histograms
          */
 
-        // segmenting the image
-        List<ConnectedComponent> components = segmenter.segment(image);
+        URL[] imageURLs = new URL[] {
+            new URL( "http://openimaj.org/tutorial/figs/hist1.jpg" ),
+            new URL( "http://openimaj.org/tutorial/figs/hist2.jpg" ),
+            new URL( "http://openimaj.org/tutorial/figs/hist3.jpg" )
+        };
+        List<MultidimensionalHistogram> histograms = new ArrayList<MultidimensionalHistogram>();
+        HistogramModel model = new HistogramModel(4, 4, 4);
+        for( URL u : imageURLs ) {
+            model.estimateModel(ImageUtilities.readMBF(u));
+            histograms.add( model.histogram.clone() );
+        }
 
-        // rendering the segments to the image
-        SegmentationUtilities.renderSegments(image, components);
+        /**
+         * Comparing histograms with different comparison measures
+         */
+        
+        for( int i = 0; i < histograms.size(); i++ ) {
+            for( int j = i; j < histograms.size(); j++ ) {
+                double distance = histograms.get(i).compare( histograms.get(j), DoubleFVComparison.EUCLIDEAN );
+                double intersection = histograms.get(i).compare( histograms.get(j), DoubleFVComparison.INTERSECTION );
+                double correlation = histograms.get(i).compare( histograms.get(j), DoubleFVComparison.CORRELATION );
+                double cosineDist = histograms.get(i).compare( histograms.get(j), DoubleFVComparison.COSINE_DIST );
 
-        // displaying the image
-        DisplayUtilities.display(image, displayFrame);
+                System.out.println("Distance between histogram :" + i + " and histogram : " + j + " : " + distance);
+                System.out.println("Intersection between histogram :" + i + " and histogram : " + j + " : " + intersection);
+                System.out.println("Correlation between histogram :" + i + " and histogram : " + j + " : " + correlation);
+                System.out.println("CosineDist between histogram :" + i + " and histogram : " + j + " : " + cosineDist);
+            }
+        }
+
+        // CONCLUSION (for tested comparison measures) //
+
+        /**
+         * Intersection - How many colours the two images share - e.g., 1 for the same image as all colours are shared.
+         * Cosine Distance - The cosine similarity between the two histograms in their feature space.
+         * Correlation - Measure of how similar the colours are ? - e.g., higher the number the more similar the image histograms.
+         */
     }
 
     ///////////////////////
