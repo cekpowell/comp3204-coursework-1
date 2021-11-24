@@ -1,25 +1,12 @@
 package uk.ac.soton.ecs.cp6g18.ch4;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.openimaj.feature.DoubleFVComparison;
-import org.openimaj.image.DisplayUtilities;
 import org.openimaj.image.ImageUtilities;
-import org.openimaj.image.MBFImage;
-import org.openimaj.image.colour.ColourSpace;
-import org.openimaj.image.pixel.ConnectedComponent;
 import org.openimaj.image.pixel.statistics.HistogramModel;
-import org.openimaj.image.processor.PixelProcessor;
-import org.openimaj.image.segmentation.FelzenszwalbHuttenlocherSegmenter;
-import org.openimaj.image.segmentation.SegmentationUtilities;
 import org.openimaj.math.statistics.distribution.MultidimensionalHistogram;
-import org.openimaj.ml.clustering.FloatCentroidsResult;
-import org.openimaj.ml.clustering.assignment.HardAssigner;
-import org.openimaj.ml.clustering.kmeans.FloatKMeans;
 
-import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**

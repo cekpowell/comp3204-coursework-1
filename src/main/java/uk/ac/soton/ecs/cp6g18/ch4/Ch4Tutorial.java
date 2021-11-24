@@ -1,13 +1,11 @@
 package uk.ac.soton.ecs.cp6g18.ch4;
 
 import org.openimaj.feature.DoubleFVComparison;
-import org.openimaj.image.DisplayUtilities;
 import org.openimaj.image.ImageUtilities;
 import org.openimaj.image.MBFImage;
 import org.openimaj.image.pixel.statistics.HistogramModel;
 import org.openimaj.math.statistics.distribution.MultidimensionalHistogram;
 
-import javax.swing.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +27,6 @@ public class Ch4Tutorial {
      * @param args System arguments.
      */
     public static void main( String[] args ) throws Exception{
-        // creating the display frame
-        JFrame displayFrame = DisplayUtilities.createNamedWindow("Display", "OpenIMAJ Tutorial: Chapter 4: Tutorial");
-
         // loading an image to be used in the tutorial
         MBFImage image = ImageUtilities.readMBF(new URL("https://images.theconversation.com/files/350851/original/file-20200803-22-dfm95n.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop"));
 
