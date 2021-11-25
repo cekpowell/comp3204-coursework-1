@@ -2,29 +2,10 @@ package uk.ac.soton.ecs.cp6g18.ch6;
 
 import org.openimaj.data.dataset.VFSGroupDataset;
 import org.openimaj.data.dataset.VFSListDataset;
-import org.openimaj.feature.local.list.LocalFeatureList;
-import org.openimaj.feature.local.matcher.BasicMatcher;
-import org.openimaj.feature.local.matcher.BasicTwoWayMatcher;
-import org.openimaj.feature.local.matcher.FastBasicKeypointMatcher;
-import org.openimaj.feature.local.matcher.FastEuclideanKeypointMatcher;
-import org.openimaj.feature.local.matcher.LocalFeatureMatcher;
-import org.openimaj.feature.local.matcher.MatchingUtilities;
-import org.openimaj.feature.local.matcher.MultipleMatchesMatcher;
-import org.openimaj.feature.local.matcher.VotingKeypointMatcher;
-import org.openimaj.feature.local.matcher.consistent.ConsistentLocalFeatureMatcher2d;
 import org.openimaj.image.DisplayUtilities;
 import org.openimaj.image.FImage;
 import org.openimaj.image.ImageUtilities;
-import org.openimaj.image.MBFImage;
-import org.openimaj.image.colour.RGBColour;
-import org.openimaj.image.feature.local.engine.DoGSIFTEngine;
-import org.openimaj.image.feature.local.keypoints.Keypoint;
-import org.openimaj.math.geometry.transforms.HomographyRefinement;
-import org.openimaj.math.geometry.transforms.estimation.RobustAffineTransformEstimator;
-import org.openimaj.math.geometry.transforms.estimation.RobustHomographyEstimator;
-import org.openimaj.math.model.fit.RANSAC;
 
-import java.net.URL;
 import java.util.Map.Entry;
 
 /**

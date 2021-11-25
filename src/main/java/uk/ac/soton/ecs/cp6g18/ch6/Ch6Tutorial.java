@@ -2,26 +2,13 @@ package uk.ac.soton.ecs.cp6g18.ch6;
 
 import org.openimaj.data.dataset.VFSGroupDataset;
 import org.openimaj.data.dataset.VFSListDataset;
-import org.openimaj.feature.local.list.LocalFeatureList;
-import org.openimaj.feature.local.matcher.BasicMatcher;
-import org.openimaj.feature.local.matcher.FastBasicKeypointMatcher;
-import org.openimaj.feature.local.matcher.LocalFeatureMatcher;
-import org.openimaj.feature.local.matcher.MatchingUtilities;
-import org.openimaj.feature.local.matcher.consistent.ConsistentLocalFeatureMatcher2d;
 import org.openimaj.image.DisplayUtilities;
 import org.openimaj.image.FImage;
 import org.openimaj.image.ImageUtilities;
-import org.openimaj.image.MBFImage;
-import org.openimaj.image.colour.RGBColour;
 import org.openimaj.image.dataset.FlickrImageDataset;
-import org.openimaj.image.feature.local.engine.DoGSIFTEngine;
-import org.openimaj.image.feature.local.keypoints.Keypoint;
-import org.openimaj.math.geometry.transforms.estimation.RobustAffineTransformEstimator;
-import org.openimaj.math.model.fit.RANSAC;
 import org.openimaj.util.api.auth.DefaultTokenFactory;
 import org.openimaj.util.api.auth.common.FlickrAPIToken;
 
-import java.net.URL;
 import java.util.Map.Entry;
 
 /**
