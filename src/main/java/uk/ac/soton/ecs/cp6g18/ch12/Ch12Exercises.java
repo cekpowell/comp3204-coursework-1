@@ -334,7 +334,7 @@ public class Ch12Exercises {
         /**
          * Standard Performance : Accuracy ~ 0.613, Error Rate ~ 0.317
          * 
-         * Performance with adjustments : Accuracy ~ ?, Error Rate ~ ?
+         * Performance with adjustments : Accuracy ~ ?, Error Rate ~ ?  (Unable to complete on local machine)
          */
     }
 

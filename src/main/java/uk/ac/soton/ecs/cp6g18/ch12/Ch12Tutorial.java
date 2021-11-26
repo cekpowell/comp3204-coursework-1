@@ -104,6 +104,18 @@ public class Ch12Tutorial {
 
         GroupedDataset<String, ListDataset<Record<FImage>>, Record<FImage>> data = GroupSampler.sample(allData, 5, false);
 
+        // RECORD OBJECTS //
+
+        /**
+         * In this case, our dataset consits of Record objects.
+         * 
+         * The Record object is typed on a data item (FImage in our case), and in addition
+         * to storing this data item, it also stores meta data about the item.
+         * 
+         * Record objects have a method getImage() that returns the underlying image that the
+         * record object is typed on.
+         */
+
         /////////////////////////////////////////////////////
         // SPLITTING THE DATASET INTO TRAINING AND TESTING //
         /////////////////////////////////////////////////////
