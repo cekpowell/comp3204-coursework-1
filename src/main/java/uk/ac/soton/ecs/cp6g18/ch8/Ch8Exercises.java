@@ -12,14 +12,11 @@ import org.openimaj.image.processing.face.detection.keypoints.FacialKeypoint.Fac
 import org.openimaj.image.typography.hershey.HersheyFont;
 import org.openimaj.math.geometry.point.Point2dImpl;
 import org.openimaj.math.geometry.shape.Ellipse;
-import org.openimaj.video.Video;
 import org.openimaj.video.VideoDisplay;
 import org.openimaj.video.VideoDisplayListener;
 import org.openimaj.video.capture.VideoCapture;
 
 import java.util.List;
-
-import javax.swing.*;
 
 /**
  * OpenIMAJ Tutorial.
@@ -47,7 +44,7 @@ public class Ch8Exercises {
 
     ////////////////
     // EXERCISE 1 //
-    ////////////////
+    ////////////////å
 
     /**
      * Exercise 1 - Drawing Facial Keypoints

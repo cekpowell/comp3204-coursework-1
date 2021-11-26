@@ -101,14 +101,14 @@
 			<artifactId>core-web</artifactId>
 			<version>${openimaj.version}</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.openimaj</groupId>
 			<artifactId>readability4j</artifactId>
 			<version>${openimaj.version}</version>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.openimaj</groupId>
 			<artifactId>webpage-analysis</artifactId>
 			<version>${openimaj.version}</version>
