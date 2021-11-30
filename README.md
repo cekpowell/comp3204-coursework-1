@@ -15,7 +15,7 @@
 
 ### Background
 
-- OpenIMAJ is an [award-winning](http://www.acmmm11.org/content-awards-recognitions.html) set of libraries and tools for multimedia content analysis and content generation. 
+- [OpenIMAJ](http://openimaj.org/) is an [award-winning](http://www.acmmm11.org/content-awards-recognitions.html) set of libraries and tools for multimedia content analysis and content generation. 
 - OpenIMAJ is very broad and contains everything from state-of-the-art computer vision (e.g. SIFT descriptors, salient region detection, face detection, etc.) and advanced data clustering, through to software that performs analysis on the content, layout and structure of webpages.
 
 ### Task Description
