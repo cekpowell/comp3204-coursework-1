@@ -18,10 +18,10 @@
 - OpenIMAJ is an [award-winning](http://www.acmmm11.org/content-awards-recognitions.html) set of libraries and tools for multimedia content analysis and content generation. 
 - OpenIMAJ is very broad and contains everything from state-of-the-art computer vision (e.g. SIFT descriptors, salient region detection, face detection, etc.) and advanced data clustering, through to software that performs analysis on the content, layout and structure of webpages.
 
-### Project Description
+### Task Description
 
-- This project is a walkthrough of the OpeIMAJ tutorial, completed as coursework for COMP3204: Computer Vision.
-- Each chapter of the tutorial contains exercises, and this codebase contains a commented-walkthrough of each chapter's tutorial as well as the solutions to the exercises.
+- Go through and complete the OpenIMAJ tutorial, making notes on the chapter contents and completing the tutorial exercises.
+- This project contains a commented-walkthrough of each chapter's tutorial as well as the solutions to the exercises.
 
 > <u>*Note:*</u> *Chapters 8,9,10 and 11 are not contained within the project as they were not required for the coursework.*
 
