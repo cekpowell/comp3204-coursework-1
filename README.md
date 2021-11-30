@@ -6,7 +6,7 @@
 
 - **[Introduction](#introduction)**
   * **[Background](#background)**
-  * **[Project Description](#project-description)**
+  * **[Task Description](#task-description)**
 - **[Usage](#usage)**
 
 ---
